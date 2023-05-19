@@ -3,23 +3,12 @@
 ## Resources
 [Comparitech's MD5 Algorithm with Example](https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/)
 
-## GROUP MEMBER 1
+## Skai Nzeuton
 
-### date x
+### 5/18
 
-info
-
-### date y
-
-info
+* Created base files
+* Wrote function to parse original string input into format for later use
 
 
-## GROUP MEMBER 2
-
-### date x
-
-info
-
-### date y
-
-info
+## Jerry Teng
