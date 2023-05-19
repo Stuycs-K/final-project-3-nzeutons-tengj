@@ -4,9 +4,9 @@ message = "They are deterministic"
 Ms = []
 
 generate_Ms(message, Ms)
-print(Ms)
+
 for M in Ms:
     print(hex(M))
-    
+
 for M in Ms:
     print(bin(M))

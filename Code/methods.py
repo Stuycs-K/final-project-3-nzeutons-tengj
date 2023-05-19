@@ -12,13 +12,14 @@ def generate_Ms(str, Ms):
                 for j in range(4):
                     if(str_index < len(str)):
                         M = M | (ord(str[str_index]) << (24 - 8*(str_index % 4)))
-                        str_index += 1
-                    elif(str_index == len(str)):
-                        M = M | (1 << (24 - 8*(str_index  % 4)))
-                        str_index += 1
-                        print(bin((1 << (24 - 8*(str_index  % 4)))))
-            elif(str_index == len(str)):
-                M = 1 << 31
+                        if(str_index + 1 == len(str)):
+                            if((str_index + 1) % 4 == 0):
+                                Ms.append(M)
+                                M = 1 << 31
+                            else:
+                                M = M | (1 << (23 - 8*(str_index % 4)))
+
+                    str_index += 1
 
             Ms.append(M)
             
