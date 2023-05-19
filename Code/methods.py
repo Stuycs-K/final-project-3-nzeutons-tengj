@@ -1,4 +1,5 @@
-def generate_Ms(str, Ms):
+def generate_Ms(str):
+    Ms = []
     str_index = 0
     for i in range(16):
         if(i == 14):
@@ -22,6 +23,7 @@ def generate_Ms(str, Ms):
                     str_index += 1
 
             Ms.append(M)
-            
+        
+    return Ms
             
         
