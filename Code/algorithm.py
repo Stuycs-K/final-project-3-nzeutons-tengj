@@ -7,6 +7,3 @@ generate_Ms(message, Ms)
 
 for M in Ms:
     print(hex(M))
-
-for M in Ms:
-    print(bin(M))
