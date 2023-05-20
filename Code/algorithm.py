@@ -1,6 +1,11 @@
+import sys
 from methods import *
 
-message = "They are deterministic"
+fileName = sys.argv[1]
+
+f = open(fileName, "r")
+message = f.read()
+
 Ms = generate_Ms(message)
 
 for M in Ms:
