@@ -19,3 +19,7 @@ Ks = generate_Ks()
 
 for K in Ks:
     print(hex(K))
+
+print()
+
+print(hex(F(originalA, originalB, originalC, originalD, Ms)))

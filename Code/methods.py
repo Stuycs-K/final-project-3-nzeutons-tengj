@@ -34,3 +34,13 @@ def generate_Ks():
         Ks.append(int(abs(math.sin(i + 1))*pow(2,32)))
 
     return Ks
+
+def F(A, B, C, D, Ms):
+    result = (B & C) | ((~B) & D)
+
+    result = (result + A) % pow(2, 32)
+
+    print(hex(Ms[0]))
+    result = (result + Ms[0]) % pow(2, 32)
+
+    return result
