@@ -10,3 +10,8 @@ Ms = generate_Ms(message)
 
 for M in Ms:
     print(hex(M))
+
+Ks = generate_Ks()
+
+for K in Ks:
+    print(hex(K))

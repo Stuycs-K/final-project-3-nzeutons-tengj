@@ -1,3 +1,5 @@
+import math
+
 def generate_Ms(str):
     Ms = []
     str_index = 0
@@ -23,7 +25,12 @@ def generate_Ms(str):
                     str_index += 1
 
             Ms.append(M)
-        
+
     return Ms
-            
-        
+
+def generate_Ks():
+    Ks = []
+    for i in range(64):
+        Ks.append(int(abs(math.sin(i + 1))*pow(2,32)))
+
+    return Ks
