@@ -3,23 +3,16 @@
 ## Resources
 [Comparitech's MD5 Algorithm with Example](https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/)
 
-## GROUP MEMBER 1
+## Skai Nzeuton
 
-### date x
+### 5/18
 
-info
+* Created base files
+* Wrote function to parse original string input into format for later use
 
-### date y
+### 5/19
 
-info
+* Made slight modifications to functionality of plaintext parsing method
+* algorithm.py now takes a command line argument for the name of the plaintext file to be encrypted
 
-
-## GROUP MEMBER 2
-
-### date x
-
-info
-
-### date y
-
-info
+## Jerry Teng
