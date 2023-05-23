@@ -48,7 +48,26 @@ def F(A, B, C, D, M, K, S):
     result = (result + A) % pow(2, 32)
 
     result = (result + M) % pow(2, 32)
-    
+
+    result = (result + K) % pow(2, 32)
+
+    result = rotate(result, S)
+
+    result = (result + B) % pow(2, 32)
+
+    return [result, B, C, D]
+
+def G(A, B, C, D, M, K, S):
+    print(hex(B & D))
+    print(hex(C & (~D)))
+    print(hex(D))
+    result = (B & D) | (C & (~D))
+    print(hex(result))
+
+    result = (result + A) % pow(2, 32)
+
+    result = (result + M) % pow(2, 32)
+
     result = (result + K) % pow(2, 32)
 
     result = rotate(result, S)
