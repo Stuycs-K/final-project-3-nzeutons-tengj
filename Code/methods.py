@@ -43,8 +43,6 @@ def rotate(num, shift):
     return (num << shift) | shift_portion
 
 def F(A, B, C, D, M, K, S):
-    originalB = 2309737967
-
     result = (B & C) | ((~B) & D)
 
     result = (result + A) % pow(2, 32)
@@ -55,6 +53,6 @@ def F(A, B, C, D, M, K, S):
 
     result = rotate(result, S)
 
-    result = (result + originalB) % pow(2, 32)
+    result = (result + B) % pow(2, 32)
 
     return [result, B, C, D]
