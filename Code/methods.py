@@ -34,3 +34,27 @@ def generate_Ks():
         Ks.append(int(abs(math.sin(i + 1))*pow(2,32)))
 
     return Ks
+
+def rotate(num, shift):
+    shift_portion = num >> (32 - shift)
+    eraser = 0b11111111111111111111111111111111
+    num &= eraser >> shift
+
+    return (num << shift) | shift_portion
+
+def F(A, B, C, D, M, K, S):
+    originalB = 2309737967
+
+    result = (B & C) | ((~B) & D)
+
+    result = (result + A) % pow(2, 32)
+
+    result = (result + M) % pow(2, 32)
+    
+    result = (result + K) % pow(2, 32)
+
+    result = rotate(result, S)
+
+    result = (result + originalB) % pow(2, 32)
+
+    return [result, B, C, D]
