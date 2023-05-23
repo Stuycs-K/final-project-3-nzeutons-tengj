@@ -57,4 +57,4 @@ def F(A, B, C, D, M, K, S):
 
     result = (result + originalB) % pow(2, 32)
 
-    return result
+    return [result, B, C, D]

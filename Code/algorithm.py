@@ -23,4 +23,11 @@ for K in Ks:
 
 print()
 
-print(hex(F(originalA, originalB, originalC, originalD, Ms[0], Ks[0], 7)))
+output = F(originalA, originalB, originalC, originalD, Ms[0], Ks[0], 7)
+
+for vector in output:
+    print(hex(vector))
+
+# for i in range(16):
+#     A
+#     F()
