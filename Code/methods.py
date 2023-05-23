@@ -58,11 +58,13 @@ def F(A, B, C, D, M, K, S):
     return [result, B, C, D]
 
 def G(A, B, C, D, M, K, S):
-    print(hex(B & D))
-    print(hex(C & (~D)))
-    print(hex(D))
+    # print(hex(B & D))
+    # print(bin(D))
+    # print(hex(~D))
+    # print(C & (~D))
+    # print(hex(D))
     result = (B & D) | (C & (~D))
-    print(hex(result))
+    # print(hex(result))
 
     result = (result + A) % pow(2, 32)
 

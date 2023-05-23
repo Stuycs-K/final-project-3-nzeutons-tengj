@@ -43,14 +43,14 @@ for i in range(16):
 # for vector in vectors:
 #     print(hex(vector))
 
-A = '0x799d1352'
-B = '0x2c34dfa2'
-C = '0xde1673be'
-D = '0x4b976282'
+A = 2040337234 # 799d1352
+B = 741662626 # 2c34dfa2
+C = 3726013374 # de1673be
+D = 1268212354 # 4b976282
 
 print("")
 
-vectors = G(int(A, 16), int(B, 16), int(C, 16), int(D, 16), Ms[0], Ks[16], 5)
+vectors = G(A, B, C, D, Ms[0], Ks[16], 5)
 
 print("")
 
