@@ -23,4 +23,4 @@ for K in Ks:
 
 print()
 
-print(hex(F(originalA, originalB, originalC, originalD, Ms, Ks)))
+print(hex(F(originalA, originalB, originalC, originalD, Ms[0], Ks[0], 7)))

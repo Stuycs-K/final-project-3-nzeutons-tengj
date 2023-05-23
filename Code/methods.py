@@ -42,18 +42,18 @@ def rotate(num, shift):
 
     return (num << shift) | shift_portion
 
-def F(A, B, C, D, Ms, Ks):
+def F(A, B, C, D, M, K, S):
     originalB = 2309737967
 
     result = (B & C) | ((~B) & D)
 
     result = (result + A) % pow(2, 32)
 
-    result = (result + Ms[0]) % pow(2, 32)
+    result = (result + M) % pow(2, 32)
     
-    result = (result + Ks[0]) % pow(2, 32)
+    result = (result + K) % pow(2, 32)
 
-    result = rotate(result, 7)
+    result = rotate(result, S)
 
     result = (result + originalB) % pow(2, 32)
 
