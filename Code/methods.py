@@ -35,15 +35,22 @@ def generate_Ks():
 
     return Ks
 
+def rotate(num, shift):
+    shift_portion = num >> (32 - shift)
+    eraser = 0b11111111111111111111111111111111
+    num &= eraser >> shift
+
+    return (num << shift) | shift_portion
+
 def F(A, B, C, D, Ms, Ks):
     result = (B & C) | ((~B) & D)
 
     result = (result + A) % pow(2, 32)
 
-    print(hex(Ms[0]))
     result = (result + Ms[0]) % pow(2, 32)
     
-    print(hex(Ks[0]))
     result = (result + Ks[0]) % pow(2, 32)
+
+    result = rotate(result, 7)
 
     return result
