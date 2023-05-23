@@ -15,4 +15,9 @@
 * Made slight modifications to functionality of plaintext parsing method
 * algorithm.py now takes a command line argument for the name of the plaintext file to be encrypted
 
+### 5/22
+
+* Finished writing F, the function used in the first of four rounds
+* algorithm.py loops over the function 16 times and rotates the inputs of the function
+
 ## Jerry Teng
