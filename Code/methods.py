@@ -74,7 +74,6 @@ def G(A, B, C, D, M, K, S):
 
 def H(A, B, C, D, M, K, S):
     result = B ^ C ^ D
-    print(hex(result))
 
     result = (result + A) % pow(2, 32)
 

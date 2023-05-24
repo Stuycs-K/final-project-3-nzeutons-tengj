@@ -55,4 +55,13 @@ B = 3574010727 # d5071367
 C = 3227037154 # c058ade2
 D = 1673921495 # 63c603d7
 
-vectors = H(A, B, C, D, Ms[0], Ks[0], 3)
+shifts = [4, 11, 16, 13]
+
+for i in range(16):
+    if(i == 0):
+        vectors = H(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 32], shifts[i % 4])
+    else:
+        vectors = H(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 32], shifts[i % 4])
+
+for vector in vectors:
+    print(hex(vector))
