@@ -20,4 +20,9 @@
 * Finished writing F, the function used in the first of four rounds
 * algorithm.py loops over the function 16 times and rotates the inputs of the function
 
+### 5/23
+
+* Finished implementing all 64 iterations of F, G, H, I
+* Added final stage of modular addition
+
 ## Jerry Teng
