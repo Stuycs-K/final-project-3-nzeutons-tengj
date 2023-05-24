@@ -1,0 +1,102 @@
+public class algorithm {
+  public static void main(String[] args) {
+    // import sys
+    // from methods import *
+
+    fileName = sys.argv[1]
+
+    originalA = 19088743; # in hex: 01234567
+    originalB = 2309737967; # in hex: 89abcdef
+    originalC = 4275878552; # in hex: fedcba98
+    originalD = 1985229328; # in hex: 76543210
+
+    f = open(fileName, "r")
+    message = f.read()
+
+    Ms = generate_Ms(message)
+
+    // # for M in Ms:
+    // #     print(hex(M))
+
+    Ks = generate_Ks()
+
+    // # for K in Ks:
+    // #     print(hex(K))
+
+    vectors = []
+
+    for i in range(16):
+        if(i == 0):
+            vectors = F(originalA, originalB, originalC, originalD, Ms[i], Ks[i], 7 + 5*(i % 4))
+        else:
+            vectors = F(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i], 7 + 5*(i % 4))
+
+    // # for vector in vectors:
+    // #     print(hex(vector))
+    //
+    // # A = 2040337234 # 799d1352
+    // # B = 741662626 # 2c34dfa2
+    // # C = 3726013374 # de1673be
+    // # D = 1268212354 # 4b976282
+
+    print("")
+
+    shifts = [5, 9, 14, 20]
+
+    for i in range(16):
+        if(i == 0):
+            vectors = G(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 16], shifts[i % 4])
+        else:
+            vectors = G(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 16], shifts[i % 4])
+
+    // # for vector in vectors:
+    // #     print(hex(vector))
+    //
+    // # A = 3944090832 # eb160cd0
+    // # B = 3574010727 # d5071367
+    // # C = 3227037154 # c058ade2
+    // # D = 1673921495 # 63c603d7
+
+    shifts = [4, 11, 16, 13]
+
+    for i in range(16):
+        if(i == 0):
+            vectors = H(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 32], shifts[i % 4])
+        else:
+            vectors = H(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 32], shifts[i % 4])
+
+    // # for vector in vectors:
+    // #     print(hex(vector))
+    //
+    // A = 1624100529 # 60cdceb1
+    // B = 2102403171 # 7d502063
+    // C = 2336059741 # 8b3d715d
+    // D = 501458745 # 1de3a739
+
+    shifts = [6, 10, 15, 21]
+
+    for i in range(16):
+        if(i == 0):
+            vectors = I(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 48], shifts[i % 4])
+        else:
+            vectors = I(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 48], shifts[i % 4])
+
+    // # for vector in vectors:
+    // #     print(hex(vector))
+    //
+    // # A = (A + originalA) % pow(2, 32)
+    // # B = (B + originalB) % pow(2, 32)
+    // # C = (C + originalC) % pow(2, 32)
+    // # D = (D + originalD) % pow(2, 32)
+    //
+    // A = (vectors[0] + originalA) % pow(2, 32)
+    // B = (vectors[1] + originalB) % pow(2, 32)
+    // C = (vectors[2] + originalC) % pow(2, 32)
+    // D = (vectors[3] + originalD) % pow(2, 32)
+
+    print(hex(A))
+    print(hex(B))
+    print(hex(C))
+    print(hex(D))
+  }
+}
