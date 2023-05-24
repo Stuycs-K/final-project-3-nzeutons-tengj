@@ -66,10 +66,10 @@ for i in range(16):
 # for vector in vectors:
 #     print(hex(vector))
 
-# A = 1624100529 # 60cdceb1
-# B = 2102403171 # 7d502063
-# C = 2336059741 # 8b3d715d
-# D = 501458745 # 1de3a739
+A = 1624100529 # 60cdceb1
+B = 2102403171 # 7d502063
+C = 2336059741 # 8b3d715d
+D = 501458745 # 1de3a739
 
 shifts = [6, 10, 15, 21]
 
@@ -79,5 +79,20 @@ for i in range(16):
     else:
         vectors = I(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 48], shifts[i % 4])
 
-for vector in vectors:
-    print(hex(vector))
+# for vector in vectors:
+#     print(hex(vector))
+
+# A = (A + originalA) % pow(2, 32)
+# B = (B + originalB) % pow(2, 32)
+# C = (C + originalC) % pow(2, 32)
+# D = (D + originalD) % pow(2, 32)
+
+A = (vectors[0] + originalA) % pow(2, 32)
+B = (vectors[1] + originalB) % pow(2, 32)
+C = (vectors[2] + originalC) % pow(2, 32)
+D = (vectors[3] + originalD) % pow(2, 32)
+
+print(hex(A))
+print(hex(B))
+print(hex(C))
+print(hex(D))
