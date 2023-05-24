@@ -42,6 +42,12 @@ def rotate(num, shift):
 
     return (num << shift) | shift_portion
 
+def true_not(num):
+    if(num & pow(2, 32) == 0):
+        return ~num
+    else:
+        return ~num & int('0b01111111111111111111111111111111', 2)
+
 def F(A, B, C, D, M, K, S):
     result = (B & C) | ((~B) & D)
 
@@ -74,6 +80,21 @@ def G(A, B, C, D, M, K, S):
 
 def H(A, B, C, D, M, K, S):
     result = B ^ C ^ D
+
+    result = (result + A) % pow(2, 32)
+
+    result = (result + M) % pow(2, 32)
+
+    result = (result + K) % pow(2, 32)
+
+    result = rotate(result, S)
+
+    result = (result + B) % pow(2, 32)
+
+    return [result, B, C, D]
+
+def I(A, B, C, D, M, K, S):
+    result = C ^ (B | (~D))
 
     result = (result + A) % pow(2, 32)
 

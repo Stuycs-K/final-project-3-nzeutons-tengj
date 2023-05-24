@@ -50,10 +50,10 @@ for i in range(16):
 # for vector in vectors:
 #     print(hex(vector))
 
-A = 3944090832 # eb160cd0
-B = 3574010727 # d5071367
-C = 3227037154 # c058ade2
-D = 1673921495 # 63c603d7
+# A = 3944090832 # eb160cd0
+# B = 3574010727 # d5071367
+# C = 3227037154 # c058ade2
+# D = 1673921495 # 63c603d7
 
 shifts = [4, 11, 16, 13]
 
@@ -62,6 +62,22 @@ for i in range(16):
         vectors = H(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 32], shifts[i % 4])
     else:
         vectors = H(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 32], shifts[i % 4])
+
+# for vector in vectors:
+#     print(hex(vector))
+
+# A = 1624100529 # 60cdceb1
+# B = 2102403171 # 7d502063
+# C = 2336059741 # 8b3d715d
+# D = 501458745 # 1de3a739
+
+shifts = [6, 10, 15, 21]
+
+for i in range(16):
+    if(i == 0):
+        vectors = I(vectors[0], vectors[1], vectors[2], vectors[3], Ms[i], Ks[i + 48], shifts[i % 4])
+    else:
+        vectors = I(vectors[3], vectors[0], vectors[1], vectors[2], Ms[i], Ks[i + 48], shifts[i % 4])
 
 for vector in vectors:
     print(hex(vector))
