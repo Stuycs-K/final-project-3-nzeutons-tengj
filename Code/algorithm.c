@@ -3,5 +3,5 @@
 
 int main(int argc, char const *argv[])
 {
-    hello();
+    printf("Hello world\n");
 }
