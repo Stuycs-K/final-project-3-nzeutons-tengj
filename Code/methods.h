@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/stat.h>
 #include <math.h>
 
-unsigned int* generate_Ms(char *str, unsigned int *Ms);
+void generate_Ms(char *fileName, unsigned int *Ms);
 unsigned int* generate_Ks(unsigned int *Ks);
 unsigned int rotate(unsigned int num, int shift);
 
