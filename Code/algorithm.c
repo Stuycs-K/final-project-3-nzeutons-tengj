@@ -84,4 +84,11 @@ int main()
     for(int i = 0; i < 4; i++) {
         printf("%x\n", vectors[i]);
     }
+
+    printf("\n");
+
+    for(int i = 0; i < 4; i++) {
+        printf("%x", vectors[i]);
+    }
+    printf("\n");
 }
