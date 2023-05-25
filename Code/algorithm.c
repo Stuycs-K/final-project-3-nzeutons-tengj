@@ -29,26 +29,70 @@ int main()
 
     unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
 
-    // printf("%x\n", F(originalB, originalC, originalD));
+    unsigned int result;
+    int shifts[4];
+    int k;
 
-    // unsigned int A = 2040337234; // 799d1352
-    // unsigned int B = 741662626; // 2c34dfa2
-    // unsigned int C = 3726013374; // de1673be
-    // unsigned int D = 1268212354; // 4b976282
+    for(int i = 0; i < 64; i++) {
+        if(i < 16) {
+            shifts[0] = 7;
+            shifts[1] = 12;
+            shifts[2] = 17;
+            shifts[3] = 22;
+            result = F(vectors[1], vectors[2], vectors[3]);
+            k = i;
+        }
+        else if(i < 32) {
+            shifts[0] = 5;
+            shifts[1] = 9;
+            shifts[2] = 14;
+            shifts[3] = 20;
+            result = G(vectors[1], vectors[2], vectors[3]);
+            k = (5*(i + 1 % 16) - 4) % 16;
+        }
+        else if(i < 48) {
+            shifts[0] = 4;
+            shifts[1] = 11;
+            shifts[2] = 16;
+            shifts[3] = 23;
+            result = H(vectors[1], vectors[2], vectors[3]);
+            k = (3*(i + 1 % 16) + 2) % 16;
+        }
+        else {
+            shifts[0] = 6;
+            shifts[1] = 10;
+            shifts[2] = 15;
+            shifts[3] = 21;
+            result = I(vectors[1], vectors[2], vectors[3]);
+            k = 7*(i % 16) % 16;
+        }
 
-    // printf("%x\n", G(B, C, D));
+        result = (result + vectors[0]) % (unsigned int) pow(2, 32);
+        // printf("%d\n", k);
+        result = (result + Ms[k]) % (unsigned int) pow(2, 32);
+        result = (result + Ks[i]) % (unsigned int) pow(2, 32);
+        result = rotate(result, shifts[i % 4]);
+        result = (result + vectors[1]) % (unsigned int) pow(2, 32);
+        
+        vectors[0] = vectors[3];
+        vectors[3] = vectors[2];
+        vectors[2] = vectors[1];
+        vectors[1] = result;
+    }
 
-    // A = 3944090832; // eb160cd0
-    // B = 3574010727; // d5071367
-    // C = 3227037154; // c058ade2
-    // D = 1673921495; // 63c603d7
+    vectors[0] = (vectors[0] + originalA) % (unsigned int) pow(2, 32);
+    vectors[1] = (vectors[1] + originalB) % (unsigned int) pow(2, 32);
+    vectors[2] = (vectors[2] + originalC) % (unsigned int) pow(2, 32);
+    vectors[3] = (vectors[3] + originalD) % (unsigned int) pow(2, 32);
 
-    // printf("%x\n", H(B, C, D));
+    for(int i = 0; i < 4; i++) {
+        printf("%x\n", vectors[i]);
+    }
 
-    // A = 1624100529; // 60cdceb1
-    // B = 2102403171; // 7d502063
-    // C = 2336059741; // 8b3d715d
-    // D = 501458745; // 1de3a739
+    printf("\n");
 
-    // printf("%x\n", I(B, C, D));
+    for(int i = 0; i < 4; i++) {
+        printf("%x", vectors[i]);
+    }
+    printf("\n");
 }
