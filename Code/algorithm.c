@@ -29,6 +29,37 @@ int main()
 
     unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
 
+    unsigned int result;
+
+    for(int i = 0; i < 64; i++) {
+        unsigned int M = Ms[i % 16];
+
+        if(i < 16) {
+            int shifts[4] = {7, 12, 17, 22};
+
+            result = F(vectors[1], vectors[2], vectors[3]);
+
+            result = (result + vectors[0]) % (unsigned int) pow(2, 32);
+            result = (result + M) % (unsigned int) pow(2, 32);
+            result = (result + Ks[i]) % (unsigned int) pow(2, 32);
+            result = rotate(result, shifts[i % 4]);
+            result = (result + vectors[1]) % (unsigned int) pow(2, 32);
+
+            if(i == 0) {
+                printf("%x\n", result);
+            }
+        }
+        else if(i < 32) {
+
+        }
+        else if(i < 48) {
+
+        }
+        else {
+
+        }
+    }
+
     // printf("%x\n", F(originalB, originalC, originalD));
 
     // unsigned int A = 2040337234; // 799d1352
