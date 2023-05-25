@@ -44,10 +44,19 @@ int main()
             result = (result + Ks[i]) % (unsigned int) pow(2, 32);
             result = rotate(result, shifts[i % 4]);
             result = (result + vectors[1]) % (unsigned int) pow(2, 32);
+            
+            vectors[0] = vectors[3];
+            vectors[3] = vectors[2];
+            vectors[2] = vectors[1];
+            vectors[1] = result;
 
             if(i == 0) {
                 printf("%x\n", result);
+                for(int i = 0; i < 4; i++) {
+                    printf("%x\n", vectors[i]);
+                }
             }
+
         }
         else if(i < 32) {
 
