@@ -31,3 +31,23 @@
 * algorithm.c concatenates final vectors to give final hash
 
 ## Jerry Teng
+
+### 5/18
+
+* Created algorithm.py\/methods.py
+
+### 5/19
+
+* Created initilizaiton vectors in algorithm.py (put the hexadecimal equivalents as a comment)
+
+### 5/22
+
+* Working on coding function F, and on generating M and K values
+
+### 5/23
+
+* Implementing modular addition, continuing on the other functions
+
+### 5/24
+
+* Tried in class to convert to convert python files to java, agreed to instead change methods\/algorithms to be coded in C
