@@ -17,13 +17,16 @@ int main()
     generate_Ks(Ks);
 
     // for(int i = 0; i < 64; i++) {
+    //   if(i % 16 == 0) {
+    //     printf("\n");
+    //   }
     //     printf("%x\n", Ks[i]);
     // }
 
-    unsigned int originalA = 19088743; // in hex: 01234567
-    unsigned int originalB = 2309737967; // in hex: 89abcdef
-    unsigned int originalC = 4275878552; // in hex: fedcba98
-    unsigned int originalD = 1985229328; // in hex: 76543210
+    unsigned int originalA = 19088743;//1732584193; in hex: 01234567
+    unsigned int originalB = 2309737967;//4023233417; in hex: 89abcdef
+    unsigned int originalC = 4275878552;//2562383102; in hex: fedcba98
+    unsigned int originalD = 1985229328;//271733878; in hex: 76543210
 
     unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
 
@@ -71,7 +74,7 @@ int main()
         result = (result + Ks[i]) % (unsigned int) pow(2, 32);
         result = rotate(result, shifts[i % 4]);
         result = (result + vectors[1]) % (unsigned int) pow(2, 32);
-        
+
         vectors[0] = vectors[3];
         vectors[3] = vectors[2];
         vectors[2] = vectors[1];
@@ -82,6 +85,8 @@ int main()
     vectors[1] = (vectors[1] + originalB) % (unsigned int) pow(2, 32);
     vectors[2] = (vectors[2] + originalC) % (unsigned int) pow(2, 32);
     vectors[3] = (vectors[3] + originalD) % (unsigned int) pow(2, 32);
+
+    printf("\n");
 
     for(int i = 0; i < 4; i++) {
         printf("%x\n", vectors[i]);
