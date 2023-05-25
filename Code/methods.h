@@ -8,7 +8,7 @@
 #include <math.h>
 
 void generate_Ms(char *fileName, unsigned int *Ms);
-unsigned int* generate_Ks(unsigned int *Ks);
+void generate_Ks(unsigned int *Ks);
 unsigned int rotate(unsigned int num, int shift);
 
 unsigned int F(unsigned int B, unsigned int C, unsigned int D);

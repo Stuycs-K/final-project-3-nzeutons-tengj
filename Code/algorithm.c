@@ -10,4 +10,13 @@ int main()
     for(int i = 0; i < 16; i++) {
         printf("%x\n", Ms[i]);
     }
+
+    printf("\n");
+
+    unsigned int Ks[64];
+    generate_Ks(Ks);
+
+    for(int i = 0; i < 64; i++) {
+        printf("%x\n", Ks[i]);
+    }
 }

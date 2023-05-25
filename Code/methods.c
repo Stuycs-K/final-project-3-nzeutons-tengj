@@ -10,7 +10,6 @@ void generate_Ms(char *fileName, unsigned int *Ms) {
     struct stat stat_buffer;
     stat(fileName, &stat_buffer);
     int str_len = stat_buffer.st_size;
-    // printf("%d\n", str_len);
 
     int str_index = 0;
     for(int i = 0; i < 16; i++) {
@@ -51,9 +50,10 @@ void generate_Ms(char *fileName, unsigned int *Ms) {
     close(fd);
 }
 
-unsigned int* generate_Ks(unsigned int *Ks) {
-    //stub solution
-    return NULL;
+void generate_Ks(unsigned int *Ks) {
+    for(int i = 0; i < 64; i++) {
+        Ks[i] = (unsigned int) (fabs(sin(i + 1)) * pow(2, 32));
+    }
 }
 
 unsigned int rotate(unsigned int num, int shift) {
