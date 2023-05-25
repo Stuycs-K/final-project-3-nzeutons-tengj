@@ -65,8 +65,7 @@ unsigned int rotate(unsigned int num, int shift) {
 }
 
 unsigned int F(unsigned int B, unsigned int C, unsigned int D) {
-    //stub solution
-    return 0;
+    return (B & C) | ((~B) & D);
 }
 
 unsigned int G(unsigned int B, unsigned int C, unsigned int D) {
