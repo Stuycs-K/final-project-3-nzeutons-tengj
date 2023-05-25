@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include "methods.h"
 
-int main(int argc, char const *argv[])
+int main()
 {
-    printf("Hello world\n");
+    unsigned int Ms[16];
+    char *fileName = "message";
+    generate_Ms(fileName, Ms);
+
+    for(int i = 0; i < 16; i++) {
+        printf("%x\n", Ms[i]);
+    }
 }
