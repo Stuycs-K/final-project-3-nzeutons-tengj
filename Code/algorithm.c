@@ -31,6 +31,7 @@ int main()
 
     unsigned int result;
     int shifts[4];
+    int k;
 
     for(int i = 0; i < 64; i++) {
         if(i < 16) {
@@ -39,6 +40,7 @@ int main()
             shifts[2] = 17;
             shifts[3] = 22;
             result = F(vectors[1], vectors[2], vectors[3]);
+            k = i;
         }
         else if(i < 32) {
             shifts[0] = 5;
@@ -46,6 +48,7 @@ int main()
             shifts[2] = 14;
             shifts[3] = 20;
             result = G(vectors[1], vectors[2], vectors[3]);
+            k = (5*(i + 1 % 16) - 4) % 16;
         }
         else if(i < 48) {
             shifts[0] = 4;
@@ -53,6 +56,7 @@ int main()
             shifts[2] = 16;
             shifts[3] = 23;
             result = H(vectors[1], vectors[2], vectors[3]);
+            k = (3*(i + 1 % 16) + 2) % 16;
         }
         else {
             shifts[0] = 6;
@@ -60,10 +64,12 @@ int main()
             shifts[2] = 15;
             shifts[3] = 21;
             result = I(vectors[1], vectors[2], vectors[3]);
+            k = 7*(i % 16) % 16;
         }
 
         result = (result + vectors[0]) % (unsigned int) pow(2, 32);
-        result = (result + Ms[i % 16]) % (unsigned int) pow(2, 32);
+        // printf("%d\n", k);
+        result = (result + Ms[k]) % (unsigned int) pow(2, 32);
         result = (result + Ks[i]) % (unsigned int) pow(2, 32);
         result = rotate(result, shifts[i % 4]);
         result = (result + vectors[1]) % (unsigned int) pow(2, 32);
