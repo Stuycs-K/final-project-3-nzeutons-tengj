@@ -30,65 +30,58 @@ int main()
     unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
 
     unsigned int result;
+    int shifts[4];
 
     for(int i = 0; i < 64; i++) {
-        unsigned int M = Ms[i % 16];
-
         if(i < 16) {
-            int shifts[4] = {7, 12, 17, 22};
-
+            shifts[0] = 7;
+            shifts[1] = 12;
+            shifts[2] = 17;
+            shifts[3] = 22;
             result = F(vectors[1], vectors[2], vectors[3]);
+        }
+        else if(i < 32) {
+            shifts[0] = 5;
+            shifts[1] = 9;
+            shifts[2] = 14;
+            shifts[3] = 20;
+            result = G(vectors[1], vectors[2], vectors[3]);
+        }
+        else if(i < 48) {
+            shifts[0] = 4;
+            shifts[1] = 11;
+            shifts[2] = 16;
+            shifts[3] = 23;
+            result = H(vectors[1], vectors[2], vectors[3]);
+        }
+        else {
+            shifts[0] = 6;
+            shifts[1] = 10;
+            shifts[2] = 15;
+            shifts[3] = 21;
+            result = I(vectors[1], vectors[2], vectors[3]);
+        }
 
-            result = (result + vectors[0]) % (unsigned int) pow(2, 32);
-            result = (result + M) % (unsigned int) pow(2, 32);
-            result = (result + Ks[i]) % (unsigned int) pow(2, 32);
-            result = rotate(result, shifts[i % 4]);
-            result = (result + vectors[1]) % (unsigned int) pow(2, 32);
-            
+        result = (result + vectors[0]) % (unsigned int) pow(2, 32);
+        result = (result + Ms[i % 16]) % (unsigned int) pow(2, 32);
+        result = (result + Ks[i]) % (unsigned int) pow(2, 32);
+        result = rotate(result, shifts[i % 4]);
+        result = (result + vectors[1]) % (unsigned int) pow(2, 32);
+        
+        // if(i < 63) {
             vectors[0] = vectors[3];
             vectors[3] = vectors[2];
             vectors[2] = vectors[1];
             vectors[1] = result;
-
-            if(i == 0) {
-                printf("%x\n", result);
-                for(int i = 0; i < 4; i++) {
-                    printf("%x\n", vectors[i]);
-                }
-            }
-
-        }
-        else if(i < 32) {
-
-        }
-        else if(i < 48) {
-
-        }
-        else {
-
-        }
+        // }
     }
 
-    // printf("%x\n", F(originalB, originalC, originalD));
+    vectors[0] = (vectors[0] + originalA) % (unsigned int) pow(2, 32);
+    vectors[1] = (vectors[1] + originalB) % (unsigned int) pow(2, 32);
+    vectors[2] = (vectors[2] + originalC) % (unsigned int) pow(2, 32);
+    vectors[3] = (vectors[3] + originalD) % (unsigned int) pow(2, 32);
 
-    // unsigned int A = 2040337234; // 799d1352
-    // unsigned int B = 741662626; // 2c34dfa2
-    // unsigned int C = 3726013374; // de1673be
-    // unsigned int D = 1268212354; // 4b976282
-
-    // printf("%x\n", G(B, C, D));
-
-    // A = 3944090832; // eb160cd0
-    // B = 3574010727; // d5071367
-    // C = 3227037154; // c058ade2
-    // D = 1673921495; // 63c603d7
-
-    // printf("%x\n", H(B, C, D));
-
-    // A = 1624100529; // 60cdceb1
-    // B = 2102403171; // 7d502063
-    // C = 2336059741; // 8b3d715d
-    // D = 501458745; // 1de3a739
-
-    // printf("%x\n", I(B, C, D));
+    for(int i = 0; i < 4; i++) {
+        printf("%x\n", vectors[i]);
+    }
 }
