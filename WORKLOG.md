@@ -20,4 +20,34 @@
 * Finished writing F, the function used in the first of four rounds
 * algorithm.py loops over the function 16 times and rotates the inputs of the function
 
+### 5/23
+
+* Finished implementing all 64 iterations of F, G, H, I
+* Added final stage of modular addition
+
+### 5/24
+
+* Transferred all code over to C
+* algorithm.c concatenates final vectors to give final hash
+
 ## Jerry Teng
+
+### 5/18
+
+* Created algorithm.py\/methods.py
+
+### 5/19
+
+* Created initilizaiton vectors in algorithm.py (put the hexadecimal equivalents as a comment)
+
+### 5/22
+
+* Working on coding function F, and on generating M and K values
+
+### 5/23
+
+* Implementing modular addition, continuing on the other functions
+
+### 5/24
+
+* Tried in class to convert to convert python files to java, agreed to instead change methods\/algorithms to be coded in C
