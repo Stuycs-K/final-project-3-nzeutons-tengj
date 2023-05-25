@@ -68,12 +68,10 @@ int main()
         result = rotate(result, shifts[i % 4]);
         result = (result + vectors[1]) % (unsigned int) pow(2, 32);
         
-        // if(i < 63) {
-            vectors[0] = vectors[3];
-            vectors[3] = vectors[2];
-            vectors[2] = vectors[1];
-            vectors[1] = result;
-        // }
+        vectors[0] = vectors[3];
+        vectors[3] = vectors[2];
+        vectors[2] = vectors[1];
+        vectors[1] = result;
     }
 
     vectors[0] = (vectors[0] + originalA) % (unsigned int) pow(2, 32);
