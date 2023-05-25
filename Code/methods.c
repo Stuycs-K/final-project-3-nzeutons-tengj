@@ -6,7 +6,7 @@ unsigned int* generate_Ms(char *str, unsigned int *Ms) {
     return NULL;
 }
 
-unsigned int* gnereate_Ks(unsigned int *Ks) {
+unsigned int* generate_Ks(unsigned int *Ks) {
     //stub solution
     return NULL;
 }

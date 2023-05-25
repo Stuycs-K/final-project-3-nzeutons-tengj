@@ -4,7 +4,7 @@
 #include <math.h>
 
 unsigned int* generate_Ms(char *str, unsigned int *Ms);
-unsigned int* gnereate_Ks(unsigned int *Ks);
+unsigned int* generate_Ks(unsigned int *Ks);
 unsigned int rotate(unsigned int num, int shift);
 
 unsigned int F(unsigned int B, unsigned int C, unsigned int D);
