@@ -34,5 +34,12 @@ int main()
     unsigned int C = 3726013374; // de1673be
     unsigned int D = 1268212354; // 4b976282
 
-    printf("%x\n", G(B, C, D));
+    // printf("%x\n", G(B, C, D));
+
+    A = 3944090832; // eb160cd0
+    B = 3574010727; // d5071367
+    C = 3227037154; // c058ade2
+    D = 1673921495; // 63c603d7
+
+    printf("%x\n", H(B, C, D));
 }

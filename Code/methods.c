@@ -73,8 +73,7 @@ unsigned int G(unsigned int B, unsigned int C, unsigned int D) {
 }
 
 unsigned int H(unsigned int B, unsigned int C, unsigned int D) {
-    //stub solution
-    return 0;
+    return B ^ C ^ D;
 }
 
 unsigned int I(unsigned int B, unsigned int C, unsigned int D) {
