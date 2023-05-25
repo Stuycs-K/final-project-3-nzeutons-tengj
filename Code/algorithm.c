@@ -20,8 +20,6 @@ int main()
     //     printf("%x\n", Ks[i]);
     // }
 
-    // printf("%x\n", rotate(0b00101011110100110000100111110000, 7));
-
     unsigned int originalA = 19088743; // in hex: 01234567
     unsigned int originalB = 2309737967; // in hex: 89abcdef
     unsigned int originalC = 4275878552; // in hex: fedcba98
