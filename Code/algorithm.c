@@ -7,16 +7,18 @@ int main()
     char *fileName = "message";
     generate_Ms(fileName, Ms);
 
-    for(int i = 0; i < 16; i++) {
-        printf("%x\n", Ms[i]);
-    }
+    // for(int i = 0; i < 16; i++) {
+    //     printf("%x\n", Ms[i]);
+    // }
 
     printf("\n");
 
     unsigned int Ks[64];
     generate_Ks(Ks);
 
-    for(int i = 0; i < 64; i++) {
-        printf("%x\n", Ks[i]);
-    }
+    // for(int i = 0; i < 64; i++) {
+    //     printf("%x\n", Ks[i]);
+    // }
+
+    printf("%x\n", rotate(0b00101011110100110000100111110000, 7));
 }
