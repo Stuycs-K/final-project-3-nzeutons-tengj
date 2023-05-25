@@ -27,5 +27,12 @@ int main()
     unsigned int originalC = 4275878552; // in hex: fedcba98
     unsigned int originalD = 1985229328; // in hex: 76543210
 
-    printf("%x\n", F(originalB, originalC, originalD));
+    // printf("%x\n", F(originalB, originalC, originalD));
+
+    unsigned int A = 2040337234; // 799d1352
+    unsigned int B = 741662626; // 2c34dfa2
+    unsigned int C = 3726013374; // de1673be
+    unsigned int D = 1268212354; // 4b976282
+
+    printf("%x\n", G(B, C, D));
 }

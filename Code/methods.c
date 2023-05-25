@@ -69,8 +69,7 @@ unsigned int F(unsigned int B, unsigned int C, unsigned int D) {
 }
 
 unsigned int G(unsigned int B, unsigned int C, unsigned int D) {
-    //stub solution
-    return 0;
+    return (B & D) | (C & (~D));
 }
 
 unsigned int H(unsigned int B, unsigned int C, unsigned int D) {
