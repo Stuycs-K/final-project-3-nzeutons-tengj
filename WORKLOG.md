@@ -25,4 +25,9 @@
 * Finished implementing all 64 iterations of F, G, H, I
 * Added final stage of modular addition
 
+### 5/24
+
+* Transferred all code over to C
+* algorithm.c concatenates final vectors to give final hash
+
 ## Jerry Teng
