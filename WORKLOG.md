@@ -30,6 +30,11 @@
 * Transferred all code over to C
 * algorithm.c concatenates final vectors to give final hash
 
+### 5/25
+
+* Added debugging print statements
+* Changed initialization vectors and trying to cross reference with other implementations
+
 ## Jerry Teng
 
 ### 5/18
