@@ -57,11 +57,7 @@ void generate_Ks(unsigned int *Ks) {
 }
 
 unsigned int rotate(unsigned int num, int shift) {
-    unsigned int shift_portion = num >> (32 - shift);
-    unsigned int eraser = 0b11111111111111111111111111111111;
-    num &= eraser >> shift;
-
-    return (num << shift) | shift_portion;
+    return (num << shift) | (num >> (32 - shift));
 }
 
 unsigned int F(unsigned int B, unsigned int C, unsigned int D) {
