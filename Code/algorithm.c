@@ -7,11 +7,11 @@ int main()
     char *fileName = "message";
     generate_Ms(fileName, Ms);
 
-    for(int i = 0; i < 16; i++) {
-        printf("%x\n", Ms[i]);
-    }
+    // for(int i = 0; i < 16; i++) {
+    //     printf("%x\n", Ms[i]);
+    // }
 
-    printf("\n");
+    // printf("\n");
 
     unsigned int Ks[64];
     generate_Ks(Ks);
@@ -88,15 +88,15 @@ int main()
 
         // printf("%x ", result);
 
-        result = (result + vectors[0]);// % (unsigned int) pow(2, 32);
+        result = (result + vectors[0]);
         // printf("%x ", Ks[i]);
         // printf("%x ", Ms[k]);
-        result = (result + Ms[k]);// % (unsigned int) pow(2, 32);
+        result = (result + Ms[k]);
         // printf("%x ", Ks[i]);
-        result = (result + Ks[i]);// % (unsigned int) pow(2, 32);
+        result = (result + Ks[i]);
         // printf("%d\n", shifts[i % 4]);
         result = rotate(result, shifts[i % 4]);
-        result = (result + vectors[1]);// % (unsigned int) pow(2, 32);
+        result = (result + vectors[1]);
 
         vectors[0] = vectors[3];
         vectors[3] = vectors[2];
@@ -106,18 +106,18 @@ int main()
         // printf("%x\n", result);
     }
 
-    vectors[0] = (vectors[0] + originalA);// % (unsigned int) pow(2, 32);
-    vectors[1] = (vectors[1] + originalB);// % (unsigned int) pow(2, 32);
-    vectors[2] = (vectors[2] + originalC);// % (unsigned int) pow(2, 32);
-    vectors[3] = (vectors[3] + originalD);// % (unsigned int) pow(2, 32);
+    vectors[0] = (vectors[0] + originalA);
+    vectors[1] = (vectors[1] + originalB);
+    vectors[2] = (vectors[2] + originalC);
+    vectors[3] = (vectors[3] + originalD);
 
-    printf("\n");
+    // printf("\n");
 
-    for(int i = 0; i < 4; i++) {
-        printf("%x\n", vectors[i]);
-    }
+    // for(int i = 0; i < 4; i++) {
+    //     printf("%x\n", vectors[i]);
+    // }
 
-    printf("\n");
+    // printf("\n");
 
     for(int i = 0; i < 4; i++) {
         printLittleEndian(vectors[i]);
