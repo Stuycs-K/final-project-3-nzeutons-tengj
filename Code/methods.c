@@ -13,10 +13,10 @@ void generate_Ms(char *fileName, unsigned int *Ms) {
 
     int str_index = 0;
     for(int i = 0; i < 16; i++) {
-        if(i == 14) {
+        if(i == 15) {
             Ms[i] = 0;
         }
-        else if(i == 15) {
+        else if(i == 14) {
             Ms[i] = 8 * str_len;
         }
         else {
@@ -27,10 +27,10 @@ void generate_Ms(char *fileName, unsigned int *Ms) {
                     char chr = 0;
                     read(fd, &chr, sizeof(char));
                     if(str_index < str_len) {
-                        M = M | (chr << (24 - 8*(str_index % 4)));
+                        M = M | (chr << (8*(str_index % 4)));
                         if(str_index + 1 == str_len) {
                             if((str_index + 1) % 4 > 0) {
-                                M = M | (1 << (23 - 8*(str_index % 4)));
+                                M = M | (128 << (8*(str_index + 1% 4)));
                             }
                         }
                     }
