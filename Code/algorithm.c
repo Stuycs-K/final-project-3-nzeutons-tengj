@@ -7,11 +7,11 @@ int main()
     char *fileName = "message";
     generate_Ms(fileName, Ms);
 
-    // for(int i = 0; i < 16; i++) {
-    //     printf("%x\n", Ms[i]);
-    // }
+    for(int i = 0; i < 16; i++) {
+        printf("%x\n", Ms[i]);
+    }
 
-    // printf("\n");
+    printf("\n");
 
     unsigned int Ks[64];
     generate_Ks(Ks);

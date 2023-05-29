@@ -39,7 +39,7 @@ void generate_Ms(char *fileName, unsigned int *Ms) {
                 }
             }
             else if(str_index == str_len) {
-                M = 1 << 31;
+                M = 128;
                 str_index++;
             }
 
