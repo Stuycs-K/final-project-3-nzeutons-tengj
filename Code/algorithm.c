@@ -120,7 +120,7 @@ int main()
     printf("\n");
 
     for(int i = 0; i < 4; i++) {
-        printf("%x", vectors[i]);
+        printLittleEndian(vectors[i]);
     }
     printf("\n");
 }

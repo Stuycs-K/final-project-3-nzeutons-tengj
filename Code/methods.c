@@ -75,3 +75,9 @@ unsigned int H(unsigned int B, unsigned int C, unsigned int D) {
 unsigned int I(unsigned int B, unsigned int C, unsigned int D) {
     return C ^ (B | (~D));
 }
+
+void printLittleEndian(unsigned int num) {
+    for(int i = 0; i < 4; i++) {
+        printf("%02x", (num << (24 - 8*i)) >> 24);
+    }
+}
