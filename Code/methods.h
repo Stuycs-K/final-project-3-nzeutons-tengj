@@ -15,3 +15,5 @@ unsigned int F(unsigned int B, unsigned int C, unsigned int D);
 unsigned int G(unsigned int B, unsigned int C, unsigned int D);
 unsigned int H(unsigned int B, unsigned int C, unsigned int D);
 unsigned int I(unsigned int B, unsigned int C, unsigned int D);
+
+void printLittleEndian(unsigned int num);
