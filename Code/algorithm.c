@@ -10,7 +10,7 @@ int main()
     // for(int i = 0; i < 16; i++) {
     //     printf("%x\n", Ms[i]);
     // }
-
+    //
     // printf("\n");
 
     unsigned int Ks[64];
@@ -45,11 +45,11 @@ int main()
     int k;
 
     for(int i = 0; i < 64; i++) {
-        // printf("%d\n", i);
-        // for(int j = 0; j < 4; j++) {
-        //     printf("%x ", vectors[j]);
-        // }
-        // printf("\n");
+        printf("%d\n", i);
+        for(int j = 0; j < 4; j++) {
+            printf("%x ", vectors[j]);
+        }
+        printf("\n");
 
         // result = vectors[0];
         if(i < 16) {
@@ -85,25 +85,25 @@ int main()
             k = 7*(i % 16) % 16;
         }
 
-        result = (result + vectors[0]) % (unsigned int) pow(2, 32);
+        result = (result + vectors[0]);// % (unsigned int) pow(2, 32);
         // printf("%d\n", k);
-        result = (result + Ms[k]) % (unsigned int) pow(2, 32);
-        result = (result + Ks[i]) % (unsigned int) pow(2, 32);
+        result = (result + Ms[k]);// % (unsigned int) pow(2, 32);
+        result = (result + Ks[i]);// % (unsigned int) pow(2, 32);
         result = rotate(result, shifts[i % 4]);
-        result = (result + vectors[1]) % (unsigned int) pow(2, 32);
+        result = (result + vectors[1]);// % (unsigned int) pow(2, 32);
 
         vectors[0] = vectors[3];
         vectors[3] = vectors[2];
         vectors[2] = vectors[1];
         vectors[1] = result;
 
-        // printf("%x\n", result);
+        printf("%x\n", result);
     }
 
-    vectors[0] = (vectors[0] + originalA) % (unsigned int) pow(2, 32);
-    vectors[1] = (vectors[1] + originalB) % (unsigned int) pow(2, 32);
-    vectors[2] = (vectors[2] + originalC) % (unsigned int) pow(2, 32);
-    vectors[3] = (vectors[3] + originalD) % (unsigned int) pow(2, 32);
+    vectors[0] = (vectors[0] + originalA);// % (unsigned int) pow(2, 32);
+    vectors[1] = (vectors[1] + originalB);// % (unsigned int) pow(2, 32);
+    vectors[2] = (vectors[2] + originalC);// % (unsigned int) pow(2, 32);
+    vectors[3] = (vectors[3] + originalD);// % (unsigned int) pow(2, 32);
 
     printf("\n");
 
