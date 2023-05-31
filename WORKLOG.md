@@ -42,6 +42,10 @@
 * Hash is formatted for little endian
 * algorithm.c takes command line argument for which file it should encrypt
 
+### 5/30
+
+* Updated README.md
+
 ## Jerry Teng
 
 ### 5/18

@@ -1,16 +1,16 @@
 # MD5 Algorithm
 
-## Project Description
+Project Description
 -------------------
 C implementation of the MD5 hash algorithm.
 
-## Instructions
+Instructions
 -------------------
 Compile: `make`  
 Run: `make run ARGS="FILENAME"`  
 `FILENAME` should contain the plaintext to be encrypted.
 
-## Links
+Links
 -------------------
 [Presentation](./PRESENTATION.md)  
 [Homework](./HOMEWORK.md)
