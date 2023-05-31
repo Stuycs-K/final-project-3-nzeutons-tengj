@@ -1,7 +1,9 @@
 # Work Log
 
 ## Resources
-[Comparitech's MD5 Algorithm with Example](https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/)
+[Comparitech's MD5 Algorithm with Example](https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/)  
+[Ronald Rivest's MD5 Documentation](https://www.rfc-editor.org/rfc/rfc1321)  
+[MD5 Wiki](https://en.wikipedia.org/wiki/MD5)
 
 ## Skai Nzeuton
 
