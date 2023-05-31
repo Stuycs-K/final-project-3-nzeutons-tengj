@@ -23,18 +23,12 @@ int main(int argc, char *argv[]) {
         //     printf("%x\n", Ks[i]);
         // }
 
-        // unsigned int originalA = 0x01234567;
-        // unsigned int originalB = 0x89abcdef;
-        // unsigned int originalC = 0xfedcba98;
-        // unsigned int originalD = 0x76543210;
-
         unsigned int originalA = 0x67452301;
         unsigned int originalB = 0xefcdab89;
         unsigned int originalC = 0x98badcfe;
         unsigned int originalD = 0x10325476;
 
         unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
-        // int vectors[4] = {65, 66, 67, 68};
 
         // for(int j = 0; j < 4; j++) {
         //     printf("%d\n", vectors[j]);
