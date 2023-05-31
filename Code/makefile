@@ -3,7 +3,7 @@ compile: algorithm.c methods.c methods.h
 	@gcc -o out algorithm.o methods.o -lm
 
 run: out
-	@./out
+	@./out $(ARGS)
 
 out:
 	@gcc -c algorithm.c methods.c

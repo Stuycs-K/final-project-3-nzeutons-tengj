@@ -35,6 +35,17 @@
 * Added debugging print statements
 * Changed initialization vectors and trying to cross reference with other implementations
 
+### 5/28
+
+* Fixed algorithm by changing padding to little endian
+* algorithm.c only prints the hash now
+* Hash is formatted for little endian
+* algorithm.c takes command line argument for which file it should encrypt
+
+### 5/30
+
+* Updated README.md
+
 ## Jerry Teng
 
 ### 5/18
