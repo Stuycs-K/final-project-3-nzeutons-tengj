@@ -2,26 +2,13 @@
 #include "methods.h"
 
 int main(int argc, char *argv[]) {
-    if(argc == 2) {
+    if(argc == 2 || argc == 3) {
         unsigned int Ms[16];
         char *fileName = argv[1];
         generate_Ms(fileName, Ms);
 
-        // for(int i = 0; i < 16; i++) {
-        //     printf("%x\n", Ms[i]);
-        // }
-
-        // printf("\n");
-
         unsigned int Ks[64];
         generate_Ks(Ks);
-
-        // for(int i = 0; i < 64; i++) {
-        //   if(i % 16 == 0) {
-        //     printf("\n");
-        //   }
-        //     printf("%x\n", Ks[i]);
-        // }
 
         unsigned int originalA = 0x67452301;
         unsigned int originalB = 0xefcdab89;
@@ -30,23 +17,11 @@ int main(int argc, char *argv[]) {
 
         unsigned int vectors[4] = {originalA, originalB, originalC, originalD};
 
-        // for(int j = 0; j < 4; j++) {
-        //     printf("%d\n", vectors[j]);
-        // }
-
         unsigned int result;
         int shifts[4];
         int k;
 
         for(int i = 0; i < 64; i++) {
-            // printf("%d\n", i);
-            // for(int j = 0; j < 4; j++) {
-            //     printf("%x ", vectors[j]);
-            // }
-            // printf("\n");
-
-            // result = vectors[0];
-            // printf("%x ", vectors[0]);
             if(i < 16) {
                 shifts[0] = 7;
                 shifts[1] = 12;
@@ -80,15 +55,9 @@ int main(int argc, char *argv[]) {
                 k = 7*(i % 16) % 16;
             }
 
-            // printf("%x ", result);
-
             result = (result + vectors[0]);
-            // printf("%x ", Ks[i]);
-            // printf("%x ", Ms[k]);
             result = (result + Ms[k]);
-            // printf("%x ", Ks[i]);
             result = (result + Ks[i]);
-            // printf("%d\n", shifts[i % 4]);
             result = rotate(result, shifts[i % 4]);
             result = (result + vectors[1]);
 
@@ -96,8 +65,6 @@ int main(int argc, char *argv[]) {
             vectors[3] = vectors[2];
             vectors[2] = vectors[1];
             vectors[1] = result;
-
-            // printf("%x\n", result);
         }
 
         vectors[0] = (vectors[0] + originalA);
@@ -105,20 +72,25 @@ int main(int argc, char *argv[]) {
         vectors[2] = (vectors[2] + originalC);
         vectors[3] = (vectors[3] + originalD);
 
-        // printf("\n");
+        if(argc == 3) {
+            FILE *fp = fopen(argv[2], "w");
+            for(int j = 0; j < 4; j++) {
+                for(int i = 0; i < 4; i++) {
+                    fprintf(fp, "%02x", (vectors[j] << (24 - 8*i)) >> 24);
+                }
+            }
 
-        // for(int i = 0; i < 4; i++) {
-        //     printf("%x\n", vectors[i]);
-        // }
-
-        // printf("\n");
-
-        for(int i = 0; i < 4; i++) {
-            printLittleEndian(vectors[i]);
+            fclose(fp);
         }
-        printf("\n");
+        else {
+            for(int i = 0; i < 4; i++) {
+                printLittleEndian(vectors[i]);
+            }
+            printf("\n");
+        }
+
     }
     else {
-        printf("Please provide only a file name.\n");
+        printf("Please provide only an input file name and an optional output file name.\n");
     }
 }
