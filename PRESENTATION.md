@@ -45,7 +45,7 @@ Each operation has 6 parts:
 2. Adding M<sub>i</sub>
 3. Adding K<sub>i</sub>
 4. Hash rotation
-5. Adding the result of the previous operation
+5. Adding the result of the previous operation (B)
 6. Vector rotation
 
 Operations are performed a total of 64 times throughout the algorithm.  
