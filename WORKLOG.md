@@ -5,6 +5,7 @@
 [Ronald Rivest's MD5 Documentation](https://www.rfc-editor.org/rfc/rfc1321)  
 [MD5 Wiki](https://en.wikipedia.org/wiki/MD5)
 [What is MD5 and Why is it Considered Insecure?](https://www.section.io/engineering-education/what-is-md5/)
+[Boolean Algebra](https://www.investopedia.com/terms/b/boolean-algebra.asp)
 
 ## Skai Nzeuton
 
