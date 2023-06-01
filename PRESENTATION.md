@@ -13,21 +13,23 @@ This makes it impossible to be certain that the file is actually secure or not.
 Because of this, most security experts recommend that MD5 should be replaced with SHA-2.
 
 ## The MD5 Process
-<img class="img-fluid" src="Pictures/full_algorithm.jpg" alt="img-verification" height="900px">
+<img class="img-fluid" src="Pictures/full_algorithm.jpg" alt="Full MD5 algorithm" height="900px">
 
 MD5 has 4 major stages:
-1. Generating M's
+1. Generating M's + K's
 2. Initialization vectors + Operations
 3. Final modular addition
 4. Concatenating final results
 
-### I. Generating M's
+As an example, we'll encrypt the message "Lord Konstantinovich" and show the results at each stage.
+
+### I. Generating M's + K's
 #### Padding
-Before generating M's, though, we may need to apply padding to our input. MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, consider an input that is 256 bits. To meet the required 512-bit block, the MD5 algorithm adds a 1, then enough 0s to reach 448 bits; in this case, the padding succeeding our input would be a one, followed by 191 zeros. 
+MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, our input is 160 bits (20 characters) long. To meet the required 512-bit block, the MD5 algorithm replaces the next byte with `10000000` (128), then adds enough 0s to reach 448 bits; in this case, the padding succeeding our input would be `10000000`, followed by 280 zeros. 
 
-But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary in the final block; 200 in binary would be 11001000, so the last 8 bits of the block would be replaced with that, while the 56 bits in between are filled up with zeros.
+But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary. Due to the input length restrictions, the last 32 bits will always be 0. So we will just replace the remaining 32 bits with `00000000 00000000 00000000 10100000` (160 in binary).
 
-##### Padding with inputs greater than 448 bits
+**Padding with inputs greater than 448 bits**  
 If our input is greater than 448 bits, then it would be split between multiple blocks. The last block, however, must have at least 1 bit of padding, in addition to the 64 bits at the end reserved for the message's length in binary. 
 
 If our remaining input was 447 bits, then the last block would be the last 447 bits, followed by a 1 and then the reserved 64 bits. 
@@ -37,12 +39,24 @@ If our remaining input was exactly 448 bits, we would need instead need two bloc
 If our remaining input was 449 bits, the second-to-last block would have these 449 bits, followed by a 1 and 62 zeros; the last block would contain 448 zeros, followed by the 64-bit message length.
 
 #### The M input
-Now that our initial input has padding, we can start generating our M's. The algorithm takes each 512-bit block, and splits them into 16 32-bit "M values"; let's refer to them as M0, M1, M2, all the way to M15. After converting these values to hexadecimal, these 16 values become the inputs to the respective 16 operations in each round. In each round however, the M values are added in a different order:
+Now that our initial input has been formatted properly, we can start generating our M's. The algorithm takes each 512-bit block, and splits them into 16 32-bit "words"; let's refer to them as M0, M1, M2, all the way to M15. After converting these values to hexadecimal, these 16 values become the inputs to the respective 16 operations in each round. In each round however, the M values are added in a different order:
 
-First round: M0, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15
-Second round: M1, M6, M11, M0, M5, M10, M15, M4, M9, M14, M3, M8, M13, M2, M7, M12
-Third round: M5, M8, M11, M14, M1, M4, M7, M10, M13, M0, M3, M6, M9, M12, M15, M2
+First round: M0, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15  
+Second round: M1, M6, M11, M0, M5, M10, M15, M4, M9, M14, M3, M8, M13, M2, M7, M12  
+Third round: M5, M8, M11, M14, M1, M4, M7, M10, M13, M0, M3, M6, M9, M12, M15, M2  
 Fourth round: M0, M7, M14, M5, M12, M3, M10, M1, M8, M15, M6, M13, M4, M11, M2, M9
+
+#### Our M's
+```
+M0 = 01100100 01110010 01101111 01001100    M8 = 00000000 00000000 00000000 00000000
+M1 = 01101110 01101111 01001011 00100000    M9 = 00000000 00000000 00000000 00000000
+M2 = 01101110 01100001 01110100 01110011    M10 = 00000000 00000000 00000000 00000000
+M3 = 01101111 01101110 01101001 01110100    M11 = 00000000 00000000 00000000 00000000
+M4 = 01101000 01100011 01101001 01110110    M12 = 00000000 00000000 00000000 00000000
+M5 = 00000000 00000000 00000000 10000000    M13 = 00000000 00000000 00000000 00000000
+M6 = 00000000 00000000 00000000 00000000    M14 = 00000000 00000000 00000000 10100000
+M7 = 00000000 00000000 00000000 00000000    M15 = 00000000 00000000 00000000 00000000
+```
 
 ### II. Initialization vectors + Operations
 #### Initialization vectors
@@ -58,7 +72,7 @@ D = 0x10325476
 #### Operations
 The operations are the process by which the initialization vectors are transformed into the hash.  
 
-<img class="img-fluid" src="Pictures/operation.jpg" alt="img-verification" height="400px">
+<img class="img-fluid" src="Pictures/operation.jpg" alt="First operation" height="400px">
 
 Each operation has 6 parts:
 1. Boolean algebra function (F, G, H, I)
