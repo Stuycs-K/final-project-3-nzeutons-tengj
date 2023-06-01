@@ -159,6 +159,25 @@ result = 0x3bdd13c3
 ```
 
 #### Hash rotation
+The next step is to left rotate our result in binary.  
+The amount we rotate by depends on the operation and round we are on:
+* Round 1: `rotation = [7, 12, 17, 22]`
+* Round 2: `rotation = [5, 9, 14, 20]`
+* Round 3: `rotation = [4, 11, 16, 23]`
+* Round 4: `rotation = [6, 10, 15, 21]`
+
+We rotate our result by rotation[i % 4] each operation.
+
+**Our result for rotation:**
+```
+result = 0x3bdd13c3
+result = 00111011 11011101 00010011 11000011
+
+rotation[i % 4] = 7
+
+result = 11101110 10001001 11100001 10011101
+result = 0xee89e19d
+```
 
 ### III. Final modular addition
 
