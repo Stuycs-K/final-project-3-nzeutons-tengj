@@ -218,6 +218,8 @@ C = 0xefcdab89
 D = 0x98badcfe
 ```
 
+We repeat this process 63 more times, using the appropriate boolean algebra functions, M values, K values, and rotations for the corresponding operation and round.
+
 ### III. Final modular addition
 
 
