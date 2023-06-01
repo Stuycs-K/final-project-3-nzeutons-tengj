@@ -224,3 +224,16 @@ We repeat this process 63 more times, using the appropriate boolean algebra func
 
 
 ### IV. Concatenating final results
+The final step is to output the final hash value.  
+To do this, we will convert the vectors to little-endian and then concatenate those results.
+
+**Our result for concatenation:**
+```
+A = 0xb3a53579 --> 0x7935a5b3
+B = 0xedc2685c --> 0x5c68c2ed
+C = 0x452dc3c7 --> 0xc7c32d45
+D = 0x8a80350c --> 0x0c35808a
+
+Final hash = ABCD
+Final hash = 7935a5b35c68c2edc7c32d450c35808a
+```
