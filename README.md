@@ -1,5 +1,9 @@
 # MD5 Algorithm
 
+Group Name: #
+-------------------
+Skai Nzeuton, Jerry Teng
+
 Project Description
 -------------------
 C implementation of the MD5 hash algorithm.

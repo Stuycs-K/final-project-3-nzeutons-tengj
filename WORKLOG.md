@@ -48,6 +48,13 @@
 
 * Updated README.md
 
+### 5/31
+
+* algorithm.c now takes optional command line argument for an output file to store the hash
+* Removed debugging comments and print statements from algorithm.c
+* Added homework to HOMEWORK.md
+* Updated README.md to include group name and member names
+
 ## Jerry Teng
 
 ### 5/18
