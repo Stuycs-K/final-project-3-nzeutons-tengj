@@ -2,7 +2,7 @@
 #include "methods.h"
 
 int main(int argc, char *argv[]) {
-    if(argc == 2) {
+    if(argc == 2 || argc == 3) {
         unsigned int Ms[16];
         char *fileName = argv[1];
         generate_Ms(fileName, Ms);
@@ -112,13 +112,25 @@ int main(int argc, char *argv[]) {
         // }
 
         // printf("\n");
+        if(argc == 3) {
+            FILE *fp = fopen(argv[2], "w");
+            for(int j = 0; j < 4; j++) {
+                for(int i = 0; i < 4; i++) {
+                    fprintf(fp, "%02x", (vectors[j] << (24 - 8*i)) >> 24);
+                }
+            }
 
-        for(int i = 0; i < 4; i++) {
-            printLittleEndian(vectors[i]);
+            fclose(fp);
         }
-        printf("\n");
+        else {
+            for(int i = 0; i < 4; i++) {
+                printLittleEndian(vectors[i]);
+            }
+            printf("\n");
+        }
+
     }
     else {
-        printf("Please provide only a file name.\n");
+        printf("Please provide only an input file name and an optional output file name.\n");
     }
 }
