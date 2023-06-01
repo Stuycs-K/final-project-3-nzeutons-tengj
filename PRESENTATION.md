@@ -75,7 +75,7 @@ The K values are a set of 64 constants, one for every operation that the algorit
 
 K1 to K16 are used in the first round, K17 to K32 are used in the second round, K33 to K48 are used in the third round, and K49 to K64 are used in the fourth round.
 
-Formula: K(i) = sin(i) * (2^32)
+Formula: K(i) = floor(abs(sin(i)) * (2^32))
 
 e.g.
 
