@@ -23,6 +23,18 @@ MD5 has 4 major stages:
 
 As an example, we'll encrypt the message "Lord Konstantinovich" and show the results at each stage.
 
+For reference:
+* Each iteration of the algorithm is referred to as an operation.
+* Every 16 operations is 1 round.
+
+   Round 1 = Operations 1-16  
+   Round 2 = Operations 17-32  
+   Round 3 = Operations 33-48  
+   Round 4 = Operations 49-64
+
+* *i* denotes the current operation we are on.
+
+
 ### I. Generating M's + K's
 #### Padding
 MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, our input is 160 bits (20 characters) long. To meet the required 512-bit block, the MD5 algorithm replaces the next byte with `10000000` (128), then adds enough 0s to reach 448 bits; in this case, the padding succeeding our input would be `10000000`, followed by 280 zeros. 
@@ -46,7 +58,7 @@ Second round: M1, M6, M11, M0, M5, M10, M15, M4, M9, M14, M3, M8, M13, M2, M7, M
 Third round: M5, M8, M11, M14, M1, M4, M7, M10, M13, M0, M3, M6, M9, M12, M15, M2  
 Fourth round: M0, M7, M14, M5, M12, M3, M10, M1, M8, M15, M6, M13, M4, M11, M2, M9
 
-#### Our M's
+**Our M's**
 ```
 M0 = 01100100 01110010 01101111 01001100  0x64726f4c     M8 = 00000000 00000000 00000000 00000000  0x00000000
 M1 = 01101110 01101111 01001011 00100000  0x6e6f4b20     M9 = 00000000 00000000 00000000 00000000  0x00000000
@@ -82,9 +94,9 @@ Each operation has 6 parts:
 5. Adding the result of the previous operation (B)
 6. Vector rotation
 
-Operations are performed a total of 64 times throughout the algorithm.  
+Operations are performed a total of 64 times throughout the algorithm.    
 Each operation uses a different value for M<sub>i</sub> and K<sub>i</sub>.  
-The boolean algebra function and hash rotation scheme change every 16 operations.
+The boolean algebra function and hash rotation scheme change every round operations.
 
 **Boolean algebra function (F, G, H, I)**  
 The first part of each operation is the boolean algebra function.  
@@ -98,17 +110,55 @@ For MD5, we use 4 logical operators:
 4. ⊕ XOR
 
 MD5 uses 4 boolean algebra functions:
-1. F: (B∧C)∨(¬B∧D) = `(B&C) | (~B|D)`
+1. F: (B∧C)∨(¬B∧D) = `(B&C) | (~B&D)`
 2. G: (B∧D)∨(C∧¬D) =  `(B&D) | (C&~D)`
 3. H: B⊕C⊕D = `B ^ C ^ D`
 4. I: C⊕(B∨¬D) = `C ^ (B|~D)`
 
-F is used for operations 1-16  
-G is used for operations 17-32  
-H is used for operations 33-48  
-I is used for operations 49-64
+F is used for round 1 (operations 1-16)  
+G is used for round 2 (operations 17-32)  
+H is used for round 3 (operations 33-48)  
+I is used for round 4 (operations 49-64)
 
-#### Our first operation is as follows:
+We add the result of these functions to initialization vector A.
+
+**Our result for F:**
+```
+result = (0xefcdab89 & 0x98badcfe) | (~0xefcdab89 & 0x10325476)
+result = 0x98badcfe
+```
+
+**Our result for adding F:**
+```
+result = 0x67452301 + 0x98badcfe
+result = 0xffffffff
+```
+
+#### Adding M<sub>i</sub>
+Next we add the appropriate M value to the result we got from the previous boolean algebra function.  
+Which M value we add depends on the current operation and round we are on:
+* Round 1: *i* = *i*
+* Round 2: *i* = (5*i* + 1) % 16
+* Round 3: *i* = (3*i* + 5) % 16
+* Round 4: *i* = 7*i* % 16
+
+**Our result for adding M<sub>i</sub>:**
+```
+result = 0xffffffff + 0x64726f4c
+result = 0x64726f4b
+```
+
+#### Adding K<sub>i</sub>
+We then add the appropriate K value to the result of the previous step.  
+The K value we add corresponds directly to which operation we are on, so we will always add the *i*th K value to our result.
+
+**Our result for adding K<sub>i</sub>:**
+```
+result = 0x64726f4b + 0xd76aa478
+result = 0x3bdd13c3
+```
+
+#### Hash rotation
 
 ### III. Final modular addition
 
