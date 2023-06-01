@@ -10,9 +10,17 @@ C implementation of the MD5 hash algorithm.
 
 Instructions
 -------------------
-Compile: `make`  
-Run: `make run ARGS="FILENAME"`  
-`FILENAME` should contain the plaintext to be encrypted.
+Compile:  
+`make` or `make compile`  
+
+Run:  
+`make run ARGS="INPUTFILE"`  
+This will print the resulting hash to the terminal.  
+
+`make run ARGS="INPUTFILE OUTPUTFILE"`  
+This will store the hash in the specified output file.  
+
+*Note: Due to our padding scheme, encryption only works on messages that have a length of 440 bits or less.
 
 Links
 -------------------
