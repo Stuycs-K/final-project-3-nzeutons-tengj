@@ -151,7 +151,7 @@ result = 0x67452301 + 0x98badcfe
 result = 0xffffffff
 ```
 
-#### Adding M<sub>i</sub>
+**Adding M<sub>i</sub>**
 Next we add the appropriate M value to the result we got from the previous boolean algebra function.  
 Which M value we add depends on the current operation and round we are on:
 * Round 1: *i* = *i*
@@ -165,7 +165,7 @@ result = 0xffffffff + 0x64726f4c
 result = 0x64726f4b
 ```
 
-#### Adding K<sub>i</sub>
+**Adding K<sub>i</sub>**
 We then add the appropriate K value to the result of the previous step.  
 The K value we add corresponds directly to which operation we are on, so we will always add the *i*th K value to our result.
 
@@ -175,7 +175,7 @@ result = 0x64726f4b + 0xd76aa478
 result = 0x3bdd13c3
 ```
 
-#### Hash rotation
+**Hash rotation**
 The next step is to left rotate our result in binary.  
 The amount we rotate by depends on the operation and round we are on:
 * Round 1: `rotation = [7, 12, 17, 22]`
@@ -194,6 +194,28 @@ rotation[i % 4] = 7
 
 result = 11101110 10001001 11100001 10011101
 result = 0xee89e19d
+```
+
+**Adding the result of the previous operation (B)**
+The second to last step is to add the result of the previous operation to our current result.  
+This value will be stored in initialization vector B, so we can just add that to our result.
+
+**Our result for adding B:**
+```
+result = 0xee89e19d + 0xefcdab89
+result = 0xde578d26
+```
+
+**Vector rotation**
+The last step to rotate the vectors to right.  
+Vector A becomes vector D, vector B becomes vector A, vector C becomes vector B, vector D becomes vector C.
+
+**Our result for vector rotation:**
+```
+A = 0x10325476
+B = 0xde578d26 <-- Our result for the first operation
+C = 0xefcdab89
+D = 0x98badcfe
 ```
 
 ### III. Final modular addition
