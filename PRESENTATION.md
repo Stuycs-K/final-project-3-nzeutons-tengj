@@ -75,11 +75,11 @@ The K values are a set of 64 constants, one for every operation that the algorit
 
 K1 to K16 are used in the first round, K17 to K32 are used in the second round, K33 to K48 are used in the third round, and K49 to K64 are used in the fourth round.
 
-Formula: K(i) = floor(abs(sin(i)) * (2^32))
+Formula: K<sub>i</sub> = floor(abs(sin(i)) * (2^32))
 
 e.g.
 
-K1 = sin(1) * (2^32) -> 0xd76aa478 (approx. 3614090360 in decimal)
+K! = sin(1) * (2^32) -> 0xd76aa478 (approx. 3614090360 in decimal)
 
 K2 = sin(2) * (2^32) -> 0xe8c7b756 (approx. 3905402710 in decimal)
 
@@ -221,8 +221,15 @@ D = 0x98badcfe
 We repeat this process 63 more times, using the appropriate boolean algebra functions, M values, K values, and rotations for the corresponding operation and round.
 
 ### III. Final modular addition
+After all 64 operations, we just need to do one more set of modular addition! This time, we need to add each output after the 64 operations, which we'll denote with a 1, with its respective original initialization vector:
 
+Final A: 0x67452301 + A1
 
+Final B: 0xefcdab89 + B1
+
+Final C: 0x98badcfe + C1
+
+Final D: 0x10325476 + D1
 ### IV. Concatenating final results
 The final step is to output the final hash value.  
 To do this, we will convert the vectors to little-endian and then concatenate those results.
