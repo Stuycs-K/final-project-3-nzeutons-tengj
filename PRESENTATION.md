@@ -21,7 +21,7 @@ MD5 has 4 major stages:
 3. Final modular addition
 4. Concatenating final results
 
-As an example, we'll encrypt the message "Lord Konstantinovich" and show the results at each stage.
+As an example, we'll encrypt the message "All hail Mr. K" and show the results at each stage.
 
 For reference:
 * Each iteration of the algorithm is referred to as an operation.
@@ -39,7 +39,7 @@ For reference:
 #### Padding
 MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, our input is 160 bits (20 characters) long. To meet the required 512-bit block, the MD5 algorithm replaces the next byte with `10000000` (128), then adds enough 0s to reach 448 bits; in this case, the padding succeeding our input would be `10000000`, followed by 280 zeros. 
 
-But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary. Due to the input length restrictions, the last 32 bits will always be 0. So we will just replace the remaining 32 bits with `00000000 00000000 00000000 10100000` (160 in binary).
+But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary. Due to the input length restrictions, the last 32 bits will always be 0. So we will just replace the second to last 32 bits with `00000000 00000000 00000000 01110000` (160 in binary).
 
 **Padding with inputs greater than 448 bits**  
 If our input is greater than 448 bits, then it would be split between multiple blocks. The last block, however, must have at least 1 bit of padding, in addition to the 64 bits at the end reserved for the message's length in binary. 
@@ -60,13 +60,13 @@ Fourth round: M0, M7, M14, M5, M12, M3, M10, M1, M8, M15, M6, M13, M4, M11, M2, 
 
 **Our M's**
 ```
-M0 = 01100100 01110010 01101111 01001100  0x64726f4c     M8 = 00000000 00000000 00000000 00000000  0x00000000
-M1 = 01101110 01101111 01001011 00100000  0x6e6f4b20     M9 = 00000000 00000000 00000000 00000000  0x00000000
-M2 = 01101110 01100001 01110100 01110011  0x6e617473    M10 = 00000000 00000000 00000000 00000000  0x00000000
-M3 = 01101111 01101110 01101001 01110100  0x6f6e6974    M11 = 00000000 00000000 00000000 00000000  0x00000000
-M4 = 01101000 01100011 01101001 01110110  0x68636976    M12 = 00000000 00000000 00000000 00000000  0x00000000
-M5 = 00000000 00000000 00000000 10000000  0x00000080    M13 = 00000000 00000000 00000000 00000000  0x00000000
-M6 = 00000000 00000000 00000000 00000000  0x00000000    M14 = 00000000 00000000 00000000 10100000  0x000000a0
+M0 = 00100000 01101100 01101100 01000001  0x206c6c41     M8 = 00000000 00000000 00000000 00000000  0x00000000
+M1 = 01101100 01101001 01100001 01101000  0x6c696168     M9 = 00000000 00000000 00000000 00000000  0x00000000
+M2 = 00101110 01110010 01001101 00100000  0x2e724d20    M10 = 00000000 00000000 00000000 00000000  0x00000000
+M3 = 00000000 10000000 01001011 00100000  0x00804b20    M11 = 00000000 00000000 00000000 00000000  0x00000000
+M4 = 00000000 00000000 00000000 00000000  0x00000000    M12 = 00000000 00000000 00000000 00000000  0x00000000
+M5 = 00000000 00000000 00000000 00000000  0x00000000    M13 = 00000000 00000000 00000000 00000000  0x00000000
+M6 = 00000000 00000000 00000000 00000000  0x00000000    M14 = 00000000 00000000 00000000 01110000  0x00000070
 M7 = 00000000 00000000 00000000 00000000  0x00000000    M15 = 00000000 00000000 00000000 00000000  0x00000000
 ```
 
@@ -161,8 +161,8 @@ Which M value we add depends on the current operation and round we are on:
 
 **Our result for adding M<sub>i</sub>:**  
 ```
-result = 0xffffffff + 0x64726f4c
-result = 0x64726f4b
+result = 0xffffffff + 0x206c6c41
+result = 0x206c6c40
 ```
 
 **Adding K<sub>i</sub>**  
@@ -171,8 +171,8 @@ The K value we add corresponds directly to which operation we are on, so we will
 
 **Our result for adding K<sub>i</sub>:**
 ```
-result = 0x64726f4b + 0xd76aa478
-result = 0x3bdd13c3
+result = 0x206c6c40 + 0xd76aa478
+result = 0xf7d710b8
 ```
 
 **Hash rotation**  
@@ -187,13 +187,13 @@ We rotate our result by rotation[i % 4] each operation.
 
 **Our result for rotation:**
 ```
-result = 0x3bdd13c3
-result = 00111011 11011101 00010011 11000011
+result = 0xf7d710b8
+result = 11110111 11010111 00010000 10111000
 
 rotation[i % 4] = 7
 
-result = 11101110 10001001 11100001 10011101
-result = 0xee89e19d
+result = 11101011 10001000 01011100 01111011
+result = 0xeb885c7b
 ```
 
 **Adding the result of the previous operation (B)**
@@ -202,8 +202,8 @@ This value will be stored in initialization vector B, so we can just add that to
 
 **Our result for adding B:**
 ```
-result = 0xee89e19d + 0xefcdab89
-result = 0xde578d26
+result = 0xeb885c7b + 0xefcdab89
+result = 0xdb560804
 ```
 
 **Vector rotation**
@@ -213,7 +213,7 @@ Vector A becomes vector D, vector B becomes vector A, vector C becomes vector B,
 **Our result for vector rotation:**
 ```
 A = 0x10325476
-B = 0xde578d26 <-- Our result for the first operation
+B = 0xdb560804 <-- Our result for the first operation
 C = 0xefcdab89
 D = 0x98badcfe
 ```
@@ -223,17 +223,17 @@ We repeat this process 63 more times, using the appropriate boolean algebra func
 ### III. Final modular addition
 After all 64 operations, we just need to do one more set of modular addition! This time, we need to add each output after the 64 operations with its respective original initialization vector:
 ```
-A = 0x67452301 + 4c601278
-A = 0xb3a53579
+A = 0x67452301 + 0xd3d883db
+A = 0x3b1da6dc
 
-B = 0xefcdab89 + fdf4bcd3
-B = 0xedc2685c
+B = 0xefcdab89 + 0xc55c2588
+B = 0xb529d111
 
-C = 0x98badcfe + ac72e6c9
-C = 0x452dc3c7
+C = 0x98badcfe + 0x940d9834
+C = 0x2cc87532
 
-D = 0x10325476 + 7a4de096
-D = 0x8a80350c
+D = 0x10325476 + 0x2aa26d82
+D = 0x3ad4c1f8
 ```
 
 ### IV. Concatenating final results
@@ -242,11 +242,11 @@ To do this, we will convert the vectors to little-endian and then concatenate th
 
 **Our result for concatenation:**
 ```
-A = 0xb3a53579 --> 0x7935a5b3
-B = 0xedc2685c --> 0x5c68c2ed
-C = 0x452dc3c7 --> 0xc7c32d45
-D = 0x8a80350c --> 0x0c35808a
+A = 0x3b1da6dc --> 0xdca61d3b
+B = 0xb529d111 --> 0x11d129b5
+C = 0x2cc87532 --> 0x3275c82c
+D = 0x3ad4c1f8 --> 0xf8c1d43a
 
 Final hash = ABCD
-Final hash = 7935a5b35c68c2edc7c32d450c35808a
+Final hash = dca61d3b11d129b53275c82cf8c1d43a
 ```
