@@ -1,6 +1,6 @@
 # Homework  
 
-## Find the result of performing the first iteration of the MD5 algorithm using the following information:  
+## Find the result of performing the first operation of the MD5 algorithm using the following information:  
 ```
 Function: F ((B & C) | ((~B) & D))  
 A: 0x67452301  
