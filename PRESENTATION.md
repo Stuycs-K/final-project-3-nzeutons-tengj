@@ -37,9 +37,9 @@ For reference:
 
 ### I. Generating M's + K's
 #### Padding
-MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, our input is 160 bits (20 characters) long. To meet the required 512-bit block, the MD5 algorithm replaces the next byte with `10000000` (128), then adds enough 0s to reach 448 bits; in this case, the padding succeeding our input would be `10000000`, followed by 280 zeros. 
+MD5's inputs are broken up into 512-bit blocks, and padding is utilized to fill up any potential empty space in a block. For example, our input is 112 bits (14 characters) long. To meet the required 512-bit block, the MD5 algorithm replaces the next byte with `10000000`, then adds enough 0s to reach 448 bits; in this case, the padding succeeding our input would be `10000000`, followed by 328 zeros. 
 
-But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary. Due to the input length restrictions, the last 32 bits will always be 0. So we will just replace the second to last 32 bits with `00000000 00000000 00000000 01110000` (160 in binary).
+But what about the last 64 bits? The algorithm reserves these bits to display the message's length in binary. Due to the input length restrictions, the last 32 bits will always be 0. So we will just replace the second to last 32 bits with `00000000 00000000 00000000 01110000` (112 in binary).
 
 **Padding with inputs greater than 448 bits**  
 If our input is greater than 448 bits, then it would be split between multiple blocks. The last block, however, must have at least 1 bit of padding, in addition to the 64 bits at the end reserved for the message's length in binary. 
