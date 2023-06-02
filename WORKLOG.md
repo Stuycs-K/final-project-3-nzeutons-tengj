@@ -57,6 +57,10 @@
 * Added homework to HOMEWORK.md
 * Updated README.md to include group name and member names
 
+### 6/1
+
+* Finished presentation
+
 ## Jerry Teng
 
 ### 5/18
