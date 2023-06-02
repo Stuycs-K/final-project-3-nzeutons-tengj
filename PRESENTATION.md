@@ -75,17 +75,17 @@ The K values are a set of 64 constants, one for every operation that the algorit
 
 K1 to K16 are used in the first round, K17 to K32 are used in the second round, K33 to K48 are used in the third round, and K49 to K64 are used in the fourth round.
 
-Formula: K<sub>i</sub> = floor(abs(sin(i)) * (2^32))
+Formula: K<sub>i</sub> = floor(abs(sin(i + 1)) * (2^32))
 
 e.g.
 
-K! = sin(1) * (2^32) -> 0xd76aa478 (approx. 3614090360 in decimal)
+K0 = sin(1) * (2^32) -> 0xd76aa478
 
-K2 = sin(2) * (2^32) -> 0xe8c7b756 (approx. 3905402710 in decimal)
+K1 = sin(2) * (2^32) -> 0xe8c7b756
 
 ...
 
-K64 = sin(64) * (2^32) -> 0xeb86d391 (approx. 3951481745 in decimal)
+K63 = sin(64) * (2^32) -> 0xeb86d391
 
 ### II. Initialization vectors + Operations
 #### Initialization vectors
@@ -151,7 +151,7 @@ result = 0x67452301 + 0x98badcfe
 result = 0xffffffff
 ```
 
-**Adding M<sub>i</sub>**
+**Adding M<sub>i</sub>**  
 Next we add the appropriate M value to the result we got from the previous boolean algebra function.  
 Which M value we add depends on the current operation and round we are on:
 * Round 1: *i* = *i*
@@ -159,13 +159,13 @@ Which M value we add depends on the current operation and round we are on:
 * Round 3: *i* = (3*i* + 5) % 16
 * Round 4: *i* = 7*i* % 16
 
-**Our result for adding M<sub>i</sub>:**
+**Our result for adding M<sub>i</sub>:**  
 ```
 result = 0xffffffff + 0x64726f4c
 result = 0x64726f4b
 ```
 
-**Adding K<sub>i</sub>**
+**Adding K<sub>i</sub>**  
 We then add the appropriate K value to the result of the previous step.  
 The K value we add corresponds directly to which operation we are on, so we will always add the *i*th K value to our result.
 
@@ -175,7 +175,7 @@ result = 0x64726f4b + 0xd76aa478
 result = 0x3bdd13c3
 ```
 
-**Hash rotation**
+**Hash rotation**  
 The next step is to left rotate our result in binary.  
 The amount we rotate by depends on the operation and round we are on:
 * Round 1: `rotation = [7, 12, 17, 22]`
@@ -221,15 +221,21 @@ D = 0x98badcfe
 We repeat this process 63 more times, using the appropriate boolean algebra functions, M values, K values, and rotations for the corresponding operation and round.
 
 ### III. Final modular addition
-After all 64 operations, we just need to do one more set of modular addition! This time, we need to add each output after the 64 operations, which we'll denote with a 1, with its respective original initialization vector:
+After all 64 operations, we just need to do one more set of modular addition! This time, we need to add each output after the 64 operations with its respective original initialization vector:
+```
+A = 0x67452301 + 4c601278
+A = 0xb3a53579
 
-Final A: 0x67452301 + A1
+B = 0xefcdab89 + fdf4bcd3
+B = 0xedc2685c
 
-Final B: 0xefcdab89 + B1
+C = 0x98badcfe + ac72e6c9
+C = 0x452dc3c7
 
-Final C: 0x98badcfe + C1
+D = 0x10325476 + 7a4de096
+D = 0x8a80350c
+```
 
-Final D: 0x10325476 + D1
 ### IV. Concatenating final results
 The final step is to output the final hash value.  
 To do this, we will convert the vectors to little-endian and then concatenate those results.
