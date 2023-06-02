@@ -78,3 +78,15 @@
 ### 5/24
 
 * Tried in class to convert to convert python files to java, agreed to instead change methods\/algorithms to be coded in C
+
+### 5/25
+
+* Found inconsistencies in our second set of operations when testing our algorithm, working on debugging to find the problem
+
+### 5/31
+
+* Started working on presentation file (created outline for presentation layout)
+
+### 6/1 
+
+* Finished presentation file (worked on sections I + III)
